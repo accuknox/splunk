@@ -1,0 +1,185 @@
+[app/ui]
+version = 9.0.1
+modtime = 1664077404.528416000
+
+[app/launcher]
+version = 9.0.1
+modtime = 1664077404.545696500
+
+[views/kubearmor_alerts]
+owner = abhinav
+version = 9.0.1
+modtime = 1664384508.035452000
+
+[datamodels/KA_TOTAL_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079741.706064500
+
+[models/KA_TOTAL_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079741.741518700
+
+[datamodels/KA_TOTAL_BLOCKED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079976.346042600
+
+[models/KA_TOTAL_BLOCKED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079976.367474700
+
+[datamodels/KA_TOTAL_AUDITED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664080390.146263100
+
+[models/KA_TOTAL_AUDITED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664080390.181978100
+
+[datamodels/KA_NAMESPACE_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193126.002143700
+
+[models/KA_NAMESPACE_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193126.026591000
+
+[datamodels/KA_PODS_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193408.517740400
+
+[models/KA_PODS_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193408.534477600
+
+[datamodels/KA_OPERATION_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209113.754592000
+
+[models/KA_OPERATION_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209113.778905500
+
+[datamodels/KA_SEVERITY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209381.407813200
+
+[models/KA_SEVERITY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209381.433333600
+
+[datamodels/KA_SEVERITY_NAMESPACE_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209778.221172600
+
+[models/KA_SEVERITY_NAMESPACE_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209778.266872900
+
+[datamodels/KA_POLICY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213217.161471800
+
+[models/KA_POLICY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213217.178222000
+
+[datamodels/KA_TAGS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213408.727654200
+
+[models/KA_TAGS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213408.746540500
+
+[nav/default]
+version = 9.0.1
+modtime = 1664213816.738071100
+
+[views/kubearmor_logs]
+owner = abhinav
+version = 9.0.1
+modtime = 1664289106.138466800
+
+[app/install/install_source_checksum]
+version = 9.0.1
+modtime = 1664281443.039102200
+
+[props/_json1]
+owner = abhinav
+version = 9.0.1
+modtime = 1664282650.921840600
+
+[views/namespace_drilldown]
+owner = abhinav
+version = 9.0.1
+modtime = 1664340526.062012700
+
+[views/tag_drilldown]
+owner = abhinav
+version = 9.0.1
+modtime = 1664341464.633729100
+
+[views/accuknox]
+owner = abhinav
+version = 9.0.1
+modtime = 1664347514.998856000
