@@ -1,4 +1,4 @@
-<form version="1.1">
+<form version="1.1" theme="dark">
   <label>KubeArmor Alerts</label>
   <fieldset submitButton="false" autoRun="true">
     <input type="time" token="timestamp" searchWhenChanged="true">
@@ -11,24 +11,21 @@
   </fieldset>
   <row>
     <panel>
-      <title>Total Alerts</title>
+      <title>Total Alerts Genrated</title>
       <single>
         <search>
-          <query>| pivot KA_TOTAL_ALERTS_F RootObject count(Action) AS "Count of Action" SPLITROW _time AS _time PERIOD auto SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_TOTALALERTS_F RootObject count(Action) AS "Count of Action" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
-          <refresh>30s</refresh>
-          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
         <option name="drilldown">none</option>
-        <option name="height">196</option>
+        <option name="height">200</option>
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x1182f3","0x1182f3"]</option>
         <option name="rangeValues">[0]</option>
-        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -36,8 +33,8 @@
         <option name="trellis.size">medium</option>
         <option name="trendColorInterpretation">standard</option>
         <option name="trendDisplayMode">absolute</option>
-        <option name="trendInterval">-24h</option>
-        <option name="underLabel">Total KubeArmor Alerts</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">Total Alerts</option>
         <option name="unitPosition">after</option>
         <option name="useColors">1</option>
         <option name="useThousandSeparators">1</option>
@@ -47,21 +44,18 @@
       <title>Total Blocked Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_TOTAL_BLOCKED_ALERTS_F RootObject count(Action) AS "Count of Action" SPLITROW _time AS _time PERIOD auto SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_TOTALBLOCKEDALERTS_F RootObject count(Action) AS "Count of Action" FILTER Action is Block ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
-          <refresh>30s</refresh>
-          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
         <option name="drilldown">none</option>
-        <option name="height">196</option>
+        <option name="height">199</option>
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0xd41f1f","0xd41f1f"]</option>
         <option name="rangeValues">[0]</option>
-        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -69,8 +63,8 @@
         <option name="trellis.size">medium</option>
         <option name="trendColorInterpretation">standard</option>
         <option name="trendDisplayMode">absolute</option>
-        <option name="trendInterval">-24h</option>
-        <option name="underLabel">Total Blocked Alerts</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">Alerts with Action : Blocked</option>
         <option name="unitPosition">after</option>
         <option name="useColors">1</option>
         <option name="useThousandSeparators">1</option>
@@ -80,21 +74,18 @@
       <title>Total Audited Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_TOTAL_AUDITED_ALERTS_F RootObject count(Action) AS "Count of Action" SPLITROW _time AS _time PERIOD auto SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_AUDITTOTAL_F RootObject count(Action) AS "Count of Action" FILTER Action is Audit ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
-          <refresh>30s</refresh>
-          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
         <option name="drilldown">none</option>
-        <option name="height">197</option>
+        <option name="height">200</option>
         <option name="numberPrecision">0</option>
-        <option name="rangeColors">["0x53a051","0xd94e17"]</option>
+        <option name="rangeColors">["0xd94e17","0xd94e17"]</option>
         <option name="rangeValues">[0]</option>
-        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -102,8 +93,8 @@
         <option name="trellis.size">medium</option>
         <option name="trendColorInterpretation">standard</option>
         <option name="trendDisplayMode">absolute</option>
-        <option name="trendInterval">-24h</option>
-        <option name="underLabel">Total Audited Alerts</option>
+        <option name="trendInterval">auto</option>
+        <option name="underLabel">Alerts with Action : Audit</option>
         <option name="unitPosition">after</option>
         <option name="useColors">1</option>
         <option name="useThousandSeparators">1</option>
@@ -123,12 +114,13 @@
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
         <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.text">Count of PolicyName</option>
+        <option name="charting.axisTitleY.text">Count of Alerts Generated and there severity</option>
         <option name="charting.axisTitleY.visibility">visible</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.abbreviation">none</option>
         <option name="charting.axisX.scale">linear</option>
         <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.fieldColors">{"1":#2D6A8B,"2":#F6AE2D,"3":#893168}</option>
         <option name="charting.axisY.scale">linear</option>
         <option name="charting.axisY2.abbreviation">none</option>
         <option name="charting.axisY2.enabled">0</option>
@@ -140,14 +132,14 @@
         <option name="charting.chart.nullValueMode">gaps</option>
         <option name="charting.chart.showDataLabels">all</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.stackMode">stacked100</option>
+        <option name="charting.chart.stackMode">stacked</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">none</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
-        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisEnd</option>
         <option name="charting.legend.mode">standard</option>
-        <option name="charting.legend.placement">right</option>
+        <option name="charting.legend.placement">bottom</option>
         <option name="charting.lineWidth">2</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
@@ -183,10 +175,10 @@
         <option name="charting.chart.bubbleSizeBy">area</option>
         <option name="charting.chart.nullValueMode">gaps</option>
         <option name="charting.chart.showDataLabels">none</option>
-        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0</option>
         <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
-        <option name="charting.drilldown">none</option>
+        <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
@@ -197,6 +189,9 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/AccuKnox/drilldown</link>
+        </drilldown>
       </chart>
     </panel>
     <panel>
@@ -229,7 +224,7 @@
         <option name="charting.chart.sliceCollapsingThreshold">0</option>
         <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
-        <option name="charting.drilldown">none</option>
+        <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
@@ -240,6 +235,9 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/AccuKnox/drilldown</link>
+        </drilldown>
       </chart>
     </panel>
   </row>
@@ -288,7 +286,7 @@
       </chart>
     </panel>
     <panel>
-      <title>Namespace Severity Summary</title>
+      <title>Alerts based on Severity</title>
       <chart>
         <search>
           <query>| pivot KA_SEVERITY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Severity SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0</query>
@@ -387,7 +385,7 @@
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
         <option name="charting.axisTitleX.visibility">visible</option>
-        <option name="charting.axisTitleY.text">Count of PolicyName</option>
+        <option name="charting.axisTitleY.text">Count of Alerts Generated</option>
         <option name="charting.axisTitleY.visibility">visible</option>
         <option name="charting.axisTitleY2.visibility">visible</option>
         <option name="charting.axisX.abbreviation">none</option>
@@ -406,7 +404,7 @@
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
         <option name="charting.chart.stackMode">stacked</option>
         <option name="charting.chart.style">shiny</option>
-        <option name="charting.drilldown">none</option>
+        <option name="charting.drilldown">all</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
@@ -416,6 +414,9 @@
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">/app/AccuKnox/summary_tags</link>
+        </drilldown>
       </chart>
     </panel>
   </row>
@@ -426,7 +427,6 @@
         <search>
           <query>index="main" Type=MatchedPolicy 
 |table _time,ClusterName,NamespaceName,PodName,Severity,PolicyName,Message,Action,Result,Tags,Resource,Source,
-| eval Source=mvindex(Source,1)
 | rename "PolicyName" AS "Policy"
 | rename "Action" AS "Action"
 | rename "Message" AS "Message"

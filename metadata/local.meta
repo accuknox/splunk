@@ -9,28 +9,28 @@ modtime = 1664077404.545696500
 [views/kubearmor_alerts]
 owner = abhinav
 version = 9.0.1
-modtime = 1664384508.035452000
+modtime = 1664477323.468163000
 
 [datamodels/KA_TOTAL_ALERTS_F]
 access = read : [ * ], write : [ admin ]
 export = none
 owner = abhinav
 version = 9.0.1
-modtime = 1664079741.706064500
+modtime = 1664474146.128122000
 
 [models/KA_TOTAL_ALERTS_F]
 access = read : [ * ], write : [ admin ]
 export = none
 owner = abhinav
 version = 9.0.1
-modtime = 1664079741.741518700
+modtime = 1664474146.130483000
 
 [datamodels/KA_TOTAL_BLOCKED_ALERTS_F]
 access = read : [ * ], write : [ admin ]
 export = none
 owner = abhinav
 version = 9.0.1
-modtime = 1664079976.346042600
+modtime = 1664474131.140270000
 
 [models/KA_TOTAL_BLOCKED_ALERTS_F]
 access = read : [ * ], write : [ admin ]
@@ -44,7 +44,7 @@ access = read : [ * ], write : [ admin ]
 export = none
 owner = abhinav
 version = 9.0.1
-modtime = 1664080390.146263100
+modtime = 1664474125.710585000
 
 [models/KA_TOTAL_AUDITED_ALERTS_F]
 access = read : [ * ], write : [ admin ]
@@ -153,16 +153,18 @@ modtime = 1664213408.746540500
 
 [nav/default]
 version = 9.0.1
-modtime = 1664213816.738071100
+modtime = 1664477479.162919000
 
 [views/kubearmor_logs]
+access = read : [ * ], write : [ admin, power ]
+export = none
 owner = abhinav
 version = 9.0.1
-modtime = 1664289106.138466800
+modtime = 1664477343.203256000
 
 [app/install/install_source_checksum]
 version = 9.0.1
-modtime = 1664281443.039102200
+modtime = 1664463128.833206000
 
 [props/_json1]
 owner = abhinav
@@ -183,3 +185,55 @@ modtime = 1664341464.633729100
 owner = abhinav
 version = 9.0.1
 modtime = 1664347514.998856000
+
+[views/drilldown]
+owner = abhinav
+version = 9.0.1
+modtime = 1664476226.379047000
+
+[views/summary_tags]
+owner = abhinav
+version = 9.0.1
+modtime = 1664476606.187697000
+
+[datamodels/KA_TOTALALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477102.067793000
+
+[models/KA_TOTALALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477102.072036000
+
+[datamodels/KA_TOTALBLOCKEDALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477110.199832000
+
+[models/KA_TOTALBLOCKEDALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477110.202332000
+
+[datamodels/KA_AUDITTOTAL_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477115.540307000
+
+[models/KA_AUDITTOTAL_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664477115.542794000
