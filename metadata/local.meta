@@ -1,296 +1,185 @@
-[history/.dummy_history]
-version = 8.1.3
-modtime = 1645763231.031979000
-
-[ui-prefs/search]
-version = 8.1.3
-modtime = 1648635270.790950000
-
-[datamodels/Network_Event_Counts]
-version = 8.1.3
-modtime = 1645788247.977885000
-
-[models/Network_Event_Counts]
-version = 8.1.3
-modtime = 1645788247.996401000
-
-[datamodels/Flow_Destination_Ip_Count]
-version = 8.1.3
-modtime = 1645789767.094934000
-
-[models/Flow_Destination_Ip_Count]
-version = 8.1.3
-modtime = 1645789767.107829000
-
-[datamodels/Network_Info]
-version = 8.1.3
-modtime = 1645790531.851743000
-
-[models/Network_Info]
-version = 8.1.3
-modtime = 1645790531.888746000
-
-[ui-prefs/dashboards]
-version = 8.1.3
-modtime = 1645792807.587785000
-
-[views/accuknox_clone]
-export = none
-owner = admin
-version = 8.1.3
-modtime = 1645793103.927844000
-
-[datamodels/System_Event_Counts]
-version = 8.1.3
-modtime = 1646027355.880424000
-
-[models/System_Event_Counts]
-version = 8.1.3
-modtime = 1646027356.027237000
-
-[datamodels/Network_Event_Counts2]
-version = 8.1.3
-modtime = 1646027505.900770000
-
-[models/Network_Event_Counts2]
-version = 8.1.3
-modtime = 1646027505.906616000
-
-[views/accuknox]
-access = read : [ * ], write : [ admin, power ]
-export = none
-owner = admin
-version = 8.1.3
-modtime = 1648633476.298804000
-
-[datamodels/KubeArmor_Severity]
-version = 8.1.3
-modtime = 1646410156.048369000
-
-[models/KubeArmor_Severity]
-version = 8.1.3
-modtime = 1646410156.052409000
-
-[datamodels/Flow_Summary_Between_Pods]
-version = 8.1.3
-modtime = 1646411972.820079000
-
-[models/Flow_Summary_Between_Pods]
-version = 8.1.3
-modtime = 1646411972.824598000
-
-[datamodels/Flow7_Summary]
-version = 8.1.3
-modtime = 1646412865.821860000
-
-[models/Flow7_Summary]
-version = 8.1.3
-modtime = 1646412865.825404000
-
-[views/cilium_logs]
-version = 8.1.3
-modtime = 1646897915.433275000
-
-[views/kubearmor_logs]
-version = 8.1.3
-modtime = 1648632528.841927000
-
-[datamodels/KubeArmor_Event_Counts]
-version = 8.1.3
-modtime = 1646496967.339257000
-
-[models/KubeArmor_Event_Counts]
-version = 8.1.3
-modtime = 1646496967.349327000
-
-[datamodels/Actio_Block_KubeArmor_Count]
-version = 8.1.3
-modtime = 1648376011.747053000
-
-[models/Actio_Block_KubeArmor_Count]
-version = 8.1.3
-modtime = 1648376011.815344000
-
-[datamodels/Action_Audit_KubeArmor]
-version = 8.1.3
-modtime = 1646497421.584003000
-
-[models/Action_Audit_KubeArmor]
-version = 8.1.3
-modtime = 1646497421.596010000
-
-[datamodels/KubeArmor_Policy_Report]
-version = 8.1.3
-modtime = 1646498279.426898000
-
-[models/KubeArmor_Policy_Report]
-version = 8.1.3
-modtime = 1646498279.435109000
-
-[datamodels/Policy_Rule_Type_OperationKubeArmor]
-version = 8.1.3
-modtime = 1646498907.211878000
-
-[models/Policy_Rule_Type_OperationKubeArmor]
-version = 8.1.3
-modtime = 1646498907.215219000
-
-[datamodels/L7_Summary]
-version = 8.1.3
-modtime = 1646500082.257837000
-
-[models/L7_Summary]
-version = 8.1.3
-modtime = 1646500082.261877000
-
-[datamodels/Events_from_Cilium_and_KubeArmor]
-version = 8.1.3
-modtime = 1646627211.784810000
-
-[models/Events_from_Cilium_and_KubeArmor]
-version = 8.1.3
-modtime = 1646627211.797423000
-
-[datamodels/Counts_of_Event_from_Hosts]
-version = 8.1.3
-modtime = 1646627935.064430000
-
-[models/Counts_of_Event_from_Hosts]
-version = 8.1.3
-modtime = 1646627935.075840000
-
-[datamodels/Events_from_All_Nodes]
-version = 8.1.3
-modtime = 1646628982.835610000
-
-[models/Events_from_All_Nodes]
-version = 8.1.3
-modtime = 1646628982.849938000
-
-[datamodels/Events_from_All_Pods]
-version = 8.1.3
-modtime = 1646630828.377650000
-
-[models/Events_from_All_Pods]
-version = 8.1.3
-modtime = 1646630828.382641000
-
-[datamodels/Events_from_Ip_Source]
-version = 8.1.3
-modtime = 1646653113.622149000
-
-[models/Events_from_Ip_Source]
-version = 8.1.3
-modtime = 1646653113.626298000
-
-[datamodels/Policy_Summary]
-version = 8.1.3
-modtime = 1646805644.450929000
-
-[models/Policy_Summary]
-version = 8.1.3
-modtime = 1646805644.456767000
-
-[datamodels/KubeArmor_Operation_Count]
-version = 8.1.3
-modtime = 1646806053.285873000
-
-[models/KubeArmor_Operation_Count]
-version = 8.1.3
-modtime = 1646806053.291942000
-
-[datamodels/Policy_Result]
-version = 8.1.3
-modtime = 1646807352.410111000
-
-[models/Policy_Result]
-version = 8.1.3
-modtime = 1646807352.420096000
-
-[datamodels/Cilium_Events_Per_Month]
-version = 8.1.3
-modtime = 1646810401.417446000
-
-[models/Cilium_Events_Per_Month]
-version = 8.1.3
-modtime = 1646810401.433888000
-
-[datamodels/KubeArmor_Events_Per_Month]
-version = 8.1.3
-modtime = 1646810644.548322000
-
-[models/KubeArmor_Events_Per_Month]
-version = 8.1.3
-modtime = 1646810644.567468000
-
-[datamodels/KA_Policy]
-version = 8.1.3
-modtime = 1648197030.186214000
-
-[models/KA_Policy]
-version = 8.1.3
-modtime = 1648197030.190816000
-
-[datamodels/PolicyTags_Summary]
-version = 8.1.3
-modtime = 1648197707.677311000
-
-[models/PolicyTags_Summary]
-version = 8.1.3
-modtime = 1648197707.696793000
-
-[datamodels/Threat_Report_From_Tags]
-version = 8.1.3
-modtime = 1648287658.979369000
-
-[models/Threat_Report_From_Tags]
-version = 8.1.3
-modtime = 1648287658.984616000
-
-[savedsearches/Threat%20Report]
-version = 8.1.3
-modtime = 1648287660.266962000
-
-[datamodels/KubeArmor_ALerts_Per_Hour]
-version = 8.1.3
-modtime = 1648625910.382240000
-
-[models/KubeArmor_ALerts_Per_Hour]
-version = 8.1.3
-modtime = 1648625910.385425000
-
-[datamodels/KubeArmor_Alerts_Per_Day]
-version = 8.1.3
-modtime = 1648626591.220434000
-
-[models/KubeArmor_Alerts_Per_Day]
-version = 8.1.3
-modtime = 1648626591.222822000
-
-[datamodels/Cilium_Alerts_Per_Day]
-version = 8.1.3
-modtime = 1648626808.326032000
-
-[models/Cilium_Alerts_Per_Day]
-version = 8.1.3
-modtime = 1648626808.328991000
-
-[datamodels/kubearmorAlerts_Summary]
-version = 8.1.3
-modtime = 1648632394.295432000
-
-[models/kubearmorAlerts_Summary]
-version = 8.1.3
-modtime = 1648632394.298303000
+[app/ui]
+version = 9.0.1
+modtime = 1664077404.528416000
+
+[app/launcher]
+version = 9.0.1
+modtime = 1664077404.545696500
 
 [views/kubearmor_alerts]
-version = 8.1.3
-modtime = 1648634248.429961000
+owner = abhinav
+version = 9.0.1
+modtime = 1664384508.035452000
 
-[datamodels/Alert_Summary_Based_on_Tags]
-version = 8.1.3
-modtime = 1648633991.993706000
+[datamodels/KA_TOTAL_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079741.706064500
 
-[models/Alert_Summary_Based_on_Tags]
-version = 8.1.3
-modtime = 1648633991.997490000
+[models/KA_TOTAL_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079741.741518700
+
+[datamodels/KA_TOTAL_BLOCKED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079976.346042600
+
+[models/KA_TOTAL_BLOCKED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664079976.367474700
+
+[datamodels/KA_TOTAL_AUDITED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664080390.146263100
+
+[models/KA_TOTAL_AUDITED_ALERTS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664080390.181978100
+
+[datamodels/KA_NAMESPACE_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193126.002143700
+
+[models/KA_NAMESPACE_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193126.026591000
+
+[datamodels/KA_PODS_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193408.517740400
+
+[models/KA_PODS_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664193408.534477600
+
+[datamodels/KA_OPERATION_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209113.754592000
+
+[models/KA_OPERATION_BREAKDOWN_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209113.778905500
+
+[datamodels/KA_SEVERITY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209381.407813200
+
+[models/KA_SEVERITY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209381.433333600
+
+[datamodels/KA_SEVERITY_NAMESPACE_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209778.221172600
+
+[models/KA_SEVERITY_NAMESPACE_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664209778.266872900
+
+[datamodels/KA_POLICY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213217.161471800
+
+[models/KA_POLICY_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213217.178222000
+
+[datamodels/KA_TAGS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213408.727654200
+
+[models/KA_TAGS_F]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = abhinav
+version = 9.0.1
+modtime = 1664213408.746540500
+
+[nav/default]
+version = 9.0.1
+modtime = 1664213816.738071100
+
+[views/kubearmor_logs]
+owner = abhinav
+version = 9.0.1
+modtime = 1664289106.138466800
+
+[app/install/install_source_checksum]
+version = 9.0.1
+modtime = 1664281443.039102200
+
+[props/_json1]
+owner = abhinav
+version = 9.0.1
+modtime = 1664282650.921840600
+
+[views/namespace_drilldown]
+owner = abhinav
+version = 9.0.1
+modtime = 1664340526.062012700
+
+[views/tag_drilldown]
+owner = abhinav
+version = 9.0.1
+modtime = 1664341464.633729100
+
+[views/accuknox]
+owner = abhinav
+version = 9.0.1
+modtime = 1664347514.998856000
