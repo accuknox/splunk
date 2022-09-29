@@ -1,0 +1,199 @@
+<form theme="dark">
+  <label>Cilium Logs</label>
+  <fieldset submitButton="false">
+    <input type="time" token="field1">
+      <label>Select Time</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Network Event Counts</title>
+      <single>
+        <search>
+          <query>| pivot Network_Event_Counts2 RootObject count(RootObject) AS "Count of 1646027397.2171" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">block</option>
+        <option name="drilldown">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x53a051","0x53a051"]</option>
+        <option name="rangeValues">[0]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">auto</option>
+        <option name="unitPosition">after</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>L7 Summary</title>
+      <table>
+        <search>
+          <query>| pivot L7_Summary RootObject count(flow.l7.http.method) AS "Count of flow.l7.http.method" SPLITROW flow.source.pod_name AS flow.source.pod_name SPLITROW flow.l7.http.method AS flow.l7.http.method SPLITROW flow.l7.type AS flow.l7.type SPLITROW flow.l7.http.url AS flow.l7.http.url SPLITROW flow.l7.http.code AS flow.l7.http.code SPLITROW flow.destination.labels{} AS "flow.destination.labels{}" SORT 100 flow.source.pod_name ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">8</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">false</option>
+        <format type="color" field="flow.l7.http.code">
+          <colorPalette type="map">{"200":#53A051,"403":#DC4E41}</colorPalette>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Flow Summary Between Pods</title>
+      <table>
+        <search>
+          <query>| pivot Flow_Summary_Between_Pods RootObject count(flow.traffic_direction) AS "Count of flow.traffic_direction" SPLITROW _time AS _time PERIOD day SPLITROW flow.source.pod_name AS flow.source.pod_name SPLITROW flow.destination.pod_name AS flow.destination.pod_name SPLITROW flow.IP.ipVersion AS flow.IP.ipVersion SPLITROW flow.IP.source AS flow.IP.source SPLITROW flow.l4.TCP.source_port AS flow.l4.TCP.source_port SPLITCOL flow.verdict BOTTOM 100 count(flow.traffic_direction) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">8</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="L7&#10;~~~">
+          <colorPalette type="sharedList"></colorPalette>
+          <scale type="sharedCategory"></scale>
+        </format>
+        <format type="color" field="L3_L4&#10;~~~">
+          <colorPalette type="sharedList"></colorPalette>
+          <scale type="sharedCategory"></scale>
+        </format>
+        <format type="color" field="FORWARDED&#10;~~~">
+          <colorPalette type="minMidMax" maxColor="#294E70" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="number" field="FORWARDED"></format>
+        <format type="color" field="FORWARDED">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="DROPPED">
+          <colorPalette type="list">[#53A051,#006D9C,#F8BE34,#F1813F,#DC4E41]</colorPalette>
+          <scale type="threshold">0,30,70,100</scale>
+        </format>
+        <format type="color" field="flow.l4.TCP.source_port">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="flow.source.pod_name">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+        <format type="color" field="flow.IP.source">
+          <colorPalette type="minMidMax" maxColor="#53A051" minColor="#FFFFFF"></colorPalette>
+          <scale type="minMidMax"></scale>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Flow Destination Ip Count</title>
+      <chart>
+        <search>
+          <query>| pivot Flow_Destination_Ip_Count RootObject count(flow.IP.destination) AS "Count of flow.IP.destination" SPLITROW _time AS _time PERIOD auto SPLITCOL flow.destination.ID SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0</query>
+          <earliest>-30d@d</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>5m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Count of flow.IP.destination</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="height">514</option>
+        <option name="refresh.display">preview</option>
+        <option name="trellis.enabled">0</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">medium</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20pivot%20Flow_Destination_Ip_Count%20RootObject%20count(flow.IP.destination)%20AS%20%22Count%20of%20flow.IP.destination%22%20SPLITROW%20_time%20AS%20_time%20PERIOD%20auto%20SPLITCOL%20flow.destination.ID%20SORT%200%20_time%20ROWSUMMARY%200%20COLSUMMARY%200%20NUMCOLS%201000%20SHOWOTHER%200&amp;earliest=-30d@d&amp;latest=now</link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <title>flowL7</title>
+      <chart>
+        <search>
+          <query>| pivot Network_Info RootObject count(flow.IP.ipVersion) AS "Count of flow.IP.ipVersion" SPLITROW _time AS _time PERIOD auto SPLITROW flow.IP.ipVersion AS flow.IP.ipVersion SPLITCOL flow.l7.http.method SORT 100 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1</query>
+          <earliest>1646697600</earliest>
+          <latest>now</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="charting.axisTitleY.text">Count of flow.L7.Method</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.chart.nullValueMode">zero</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="height">526</option>
+        <option name="refresh.display">progressbar</option>
+        <drilldown>
+          <link target="_blank">search?q=%7C%20pivot%20Network_Info%20RootObject%20count(flow.IP.ipVersion)%20AS%20%22Count%20of%20flow.IP.ipVersion%22%20SPLITROW%20_time%20AS%20_time%20PERIOD%20auto%20SPLITROW%20flow.IP.ipVersion%20AS%20flow.IP.ipVersion%20SPLITCOL%20flow.l7.http.method%20SORT%20100%20_time%20ROWSUMMARY%200%20COLSUMMARY%200%20NUMCOLS%20100%20SHOWOTHER%201&amp;earliest=-30d@d&amp;latest=now</link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+</form>
