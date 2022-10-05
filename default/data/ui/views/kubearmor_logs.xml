@@ -1,10 +1,27 @@
 <form version="1.1" theme="dark">
   <label>Logs</label>
   <fieldset submitButton="false">
+    <input type="radio" token="Type" searchWhenChanged="true">
+      <label>Show Log Type</label>
+      <fieldForLabel>Type</fieldForLabel>
+      <fieldForValue>Type</fieldForValue>
+      <search>
+        <query>index="main" Type="MatchedPolicy" OR "ContainerLog"
+| dedup Type
+| table Type</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">All</choice>
+      <choice value="ContainerLog">Logs</choice>
+      <choice value="MatchedPolicy">Alerts</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
     <input type="time" token="timestamp" searchWhenChanged="true">
       <label>Select Time</label>
       <default>
-        <earliest>-30d@d</earliest>
+        <earliest>-7d@h</earliest>
         <latest>now</latest>
       </default>
     </input>
@@ -14,7 +31,7 @@
       <fieldForLabel>ClusterName</fieldForLabel>
       <fieldForValue>ClusterName</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" ClusterName="*"
+        <query>index="main" Type="MatchedPolicy"  OR Type="ContainerLog" ClusterName="*"
 | table ClusterName
 | dedup ClusterName</query>
         <earliest>0</earliest>
@@ -31,7 +48,7 @@
       <fieldForLabel>NamespaceName</fieldForLabel>
       <fieldForValue>NamespaceName</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" NamespaceName="*"
+        <query>index="main" Type="MatchedPolicy"  OR Type="ContainerLog" NamespaceName="*"
 | table NamespaceName 
 | dedup NamespaceName</query>
         <earliest>0</earliest>
@@ -43,7 +60,7 @@
       <fieldForLabel>PodName</fieldForLabel>
       <fieldForValue>PodName</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" PodName="*" 
+        <query>index="main" Type="MatchedPolicy"  OR Type="ContainerLog" PodName="*" 
 | table PodName 
 | dedup PodName</query>
         <earliest>0</earliest>
@@ -61,24 +78,9 @@
       <fieldForLabel>Operation</fieldForLabel>
       <fieldForValue>Operation</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" Operation ="*" 
+        <query>index="main" Type="MatchedPolicy" OR Type="ContainerLog" Operation ="*" 
 | table Operation 
 | dedup Operation</query>
-        <earliest>0</earliest>
-        <latest></latest>
-      </search>
-    </input>
-    <input type="dropdown" token="Severity" searchWhenChanged="true">
-      <label>Severity</label>
-      <choice value="*">All</choice>
-      <default>*</default>
-      <initialValue>*</initialValue>
-      <fieldForLabel>Severity</fieldForLabel>
-      <fieldForValue>Severity</fieldForValue>
-      <search>
-        <query>index="main" Type="MatchedPolicy" Severity ="*" 
-| table Severity 
-| dedup Severity</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
@@ -88,7 +90,7 @@
     <panel>
       <event>
         <search>
-          <query>index="main"  NamespaceName="$NamespaceName$" PodName="$PodName$" Severity="$Severity$" Operation="$Operation$" ClusterName="$ClusterName$"</query>
+          <query>index="main" Type="MatchedPolicy" OR Type="ContainerLog"  NamespaceName="$NamespaceName$" PodName="$PodName$"  Operation="$Operation$"  ClusterName="$ClusterName$" $Type$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
