@@ -4,7 +4,7 @@
     <input type="radio" token="Type" searchWhenChanged="true">
       <label>Show Log Type</label>
       <fieldForLabel>Type</fieldForLabel>
-      <fieldForValue>Type</fieldForValue>
+      <fieldForValue>Log</fieldForValue>
       <search>
         <query>index="main" Type="MatchedPolicy" OR "ContainerLog"
 | dedup Type
@@ -13,8 +13,8 @@
         <latest></latest>
       </search>
       <choice value="*">All</choice>
-      <choice value="ContainerLog">Logs</choice>
       <choice value="MatchedPolicy">Alerts</choice>
+      <choice value="ContainerLog">Logs</choice>
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
