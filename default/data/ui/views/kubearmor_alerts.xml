@@ -8,13 +8,58 @@
         <latest>now</latest>
       </default>
     </input>
+    <input type="dropdown" token="ClusterName">
+      <label>Select Cluster</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>ClusterName</fieldForLabel>
+      <fieldForValue>ClusterName</fieldForValue>
+      <search>
+        <query>index="main" Type="MatchedPolicy" ClusterName="*"
+| table ClusterName
+| dedup ClusterName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="NamespaceName" searchWhenChanged="true">
+      <label>Namespace</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>NamespaceName</fieldForLabel>
+      <fieldForValue>NamespaceName</fieldForValue>
+      <search>
+        <query>index="main" Type="MatchedPolicy" NamespaceName="*"
+| table NamespaceName 
+| dedup NamespaceName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+    </input>
+    <input type="dropdown" token="PodName">
+      <label>Pod</label>
+      <fieldForLabel>PodName</fieldForLabel>
+      <fieldForValue>PodName</fieldForValue>
+      <search>
+        <query>index="main" Type="MatchedPolicy" PodName="*" 
+| table PodName 
+| dedup PodName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
   </fieldset>
   <row>
     <panel>
       <title>Total Alerts Genrated</title>
       <single>
         <search>
-          <query>| pivot KA_TOTALALERTS_F RootObject count(Action) AS "Count of Action" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_TOTALALERTS_F RootObject count(Action) AS "Count of Action" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -26,6 +71,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x1182f3","0x1182f3"]</option>
         <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -44,7 +90,7 @@
       <title>Total Blocked Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_TOTALBLOCKEDALERTS_F RootObject count(Action) AS "Count of Action" FILTER Action is Block ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_TOTALBLOCKEDALERTS_F RootObject count(Action) AS "Count of Action" FILTER Action is Block ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -56,6 +102,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0xd41f1f","0xd41f1f"]</option>
         <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -74,7 +121,7 @@
       <title>Total Audited Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_AUDITTOTAL_F RootObject count(Action) AS "Count of Action" FILTER Action is Audit ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_AUDITTOTAL_F RootObject count(Action) AS "Count of Action" FILTER Action is Audit ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -86,6 +133,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0xd94e17","0xd94e17"]</option>
         <option name="rangeValues">[0]</option>
+        <option name="refresh.display">progressbar</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -106,7 +154,7 @@
       <title>Namespace Severity Summary</title>
       <chart>
         <search>
-          <query>| pivot KA_SEVERITY_NAMESPACE_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SPLITCOL Severity BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1</query>
+          <query>| pivot KA_SEVERITY_NAMESPACE_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SPLITCOL Severity BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -120,7 +168,6 @@
         <option name="charting.axisX.abbreviation">none</option>
         <option name="charting.axisX.scale">linear</option>
         <option name="charting.axisY.abbreviation">none</option>
-        <option name="charting.fieldColors">{"1":#2D6A8B,"2":#F6AE2D,"3":#893168}</option>
         <option name="charting.axisY.scale">linear</option>
         <option name="charting.axisY2.abbreviation">none</option>
         <option name="charting.axisY2.enabled">0</option>
@@ -135,12 +182,14 @@
         <option name="charting.chart.stackMode">stacked</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"1":#FD0000,"2":#FD3000,"3":#FD6800 , "4":#FD8900 , "5":#FDBA00 , "6":#FDD400, "7":#EBFD00,"8":#7FFD00, "9":#00FDA9, "10":#00A6FD }</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisEnd</option>
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">bottom</option>
         <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -152,7 +201,7 @@
       <title>Alerts generated form Different Namespace</title>
       <chart>
         <search>
-          <query>| pivot KA_NAMESPACE_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_NAMESPACE_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -186,6 +235,7 @@
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
         <option name="height">309</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -198,7 +248,7 @@
       <title>Alerts generated form Different Pods</title>
       <chart>
         <search>
-          <query>| pivot KA_PODS_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW PodName AS PodName BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1</query>
+          <query>| pivot KA_PODS_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW PodName AS PodName BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -232,6 +282,7 @@
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
         <option name="height">309</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -246,7 +297,7 @@
       <title>Alerts based on Operations</title>
       <chart>
         <search>
-          <query>| pivot KA_OPERATION_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Operation SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1</query>
+          <query>| pivot KA_OPERATION_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Operation SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -280,6 +331,7 @@
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -289,7 +341,7 @@
       <title>Alerts based on Severity</title>
       <chart>
         <search>
-          <query>| pivot KA_SEVERITY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Severity SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0</query>
+          <query>| pivot KA_SEVERITY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Severity SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -317,12 +369,14 @@
         <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"1":#FD0000,"2":#FD3000,"3":#FD6800 , "4":#FD8900 , "5":#FDBA00 , "6":#FDD400, "7":#EBFD00,"8":#7FFD00, "9":#00FDA9, "10":#00A6FD }</option>
         <option name="charting.layout.splitSeries">0</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -334,7 +388,7 @@
       <title>Policy Breakdown</title>
       <chart>
         <search>
-          <query>| pivot KA_POLICY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL PolicyName SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1</query>
+          <query>| pivot KA_POLICY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL PolicyName SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -368,6 +422,7 @@
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -377,7 +432,7 @@
       <title>Alerts based on Tags</title>
       <chart>
         <search>
-          <query>| pivot KA_TAGS_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW Tags AS Tags SPLITCOL Tags SORT 100 Tags ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1</query>
+          <query>| pivot KA_TAGS_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW Tags AS Tags SPLITCOL Tags SORT 100 Tags ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -411,6 +466,7 @@
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
@@ -425,8 +481,9 @@
       <title>Alerts Summary</title>
       <table>
         <search>
-          <query>index="main" Type=MatchedPolicy 
-|table _time,ClusterName,NamespaceName,PodName,Severity,PolicyName,Message,Action,Result,Tags,Resource,Source,
+          <query>index="main" Type=MatchedPolicy  NamespaceName="$NamespaceName$" ClusterName="$ClusterName$" PodName="$PodName$"
+|table _time,ClusterName, NamespaceName,PodName,Severity,PolicyName,Message,Action,Result,Tags,Resource,Source 
+| sort 0 - _time
 | rename "PolicyName" AS "Policy"
 | rename "Action" AS "Action"
 | rename "Message" AS "Message"
@@ -446,7 +503,7 @@
         <option name="refresh.display">progressbar</option>
         <format type="number" field="Severity"></format>
         <format type="color" field="Severity">
-          <colorPalette type="map">{"Critical":#D41F1F,"High":#D94E17,"Medium":#CBA700,"Low":#118832,"Informational":#1182F3}</colorPalette>
+          <colorPalette type="map">{"1":#FD0000,"2":#FD3000,"3":#FD6800 , "4":#FD8900 , "5":#FDBA00 , "6":#FDD400, "7":#EBFD00,"8":#7FFD00, "9":#00FDA9, "10":#00A6FD }</colorPalette>
         </format>
         <format type="color" field="Action">
           <colorPalette type="map">{"Audit":#CBA700,"Block":#D41F1F,"Allow":#55C169}</colorPalette>
