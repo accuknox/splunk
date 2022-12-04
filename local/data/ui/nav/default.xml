@@ -1,0 +1,6 @@
+<nav search_view="search">
+  <view name="kubearmor_alerts" default='true'  />
+  <view name="compliance_controls" />
+  <view name="kubearmor_logs" />
+  
+</nav>
