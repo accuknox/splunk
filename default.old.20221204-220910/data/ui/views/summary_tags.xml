@@ -1,0 +1,61 @@
+<form version="1.1" theme="dark">
+  <label>Summary Based  on tags</label>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="Tags">
+      <label>Select Tags</label>
+      <fieldForLabel>Tags</fieldForLabel>
+      <fieldForValue>Tags</fieldForValue>
+      <search>
+        <query>index="main" Tags="*" 
+| table Tags 
+| dedup Tags</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="timestamp" searchWhenChanged="true">
+      <label>Select Time</label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>index="main" Type=MatchedPolicy Tags="$Tags$"  
+|table _time,ClusterName,NamespaceName,PodName,PolicyName, Severity,Message,Action,Tags,Resource,Source 
+
+| rename "PolicyName" AS "Policy"</query>
+          <earliest>$timestamp.earliest$</earliest>
+          <latest>$timestamp.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+          <refresh>1m</refresh>
+          <refreshType>delay</refreshType>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format type="color" field="Action">
+          <colorPalette type="map">{"Block":#D41F1F,"Audit":#E3723A,"Allow":#118832}</colorPalette>
+        </format>
+        <format type="color" field="Severity">
+          <colorPalette type="map">{"1":#9E2520,"3":#D94E17,"5":#CBA700,"7":#118832,"9":#0099E0}</colorPalette>
+        </format>
+        <format type="color" field="Action">
+          <colorPalette type="map">{"Audit":#E3723A,"Block":#D41F1F,"Allow":#118832}</colorPalette>
+        </format>
+      </table>
+    </panel>
+  </row>
+</form>
