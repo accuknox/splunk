@@ -14,7 +14,7 @@
       <fieldForLabel>cluster_name</fieldForLabel>
       <fieldForValue>cluster_name</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" cluster_name="*"
+        <query>index="*" Type="MatchedPolicy" cluster_name="*"
 | table cluster_name
 | dedup cluster_name</query>
         <earliest>0</earliest>
@@ -31,7 +31,7 @@
       <fieldForLabel>NamespaceName</fieldForLabel>
       <fieldForValue>NamespaceName</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" NamespaceName="*"
+        <query>index="*" Type="MatchedPolicy" NamespaceName="*" cluster_name=$ClusterName$
 | table NamespaceName 
 | dedup NamespaceName</query>
         <earliest>0</earliest>
@@ -43,7 +43,7 @@
       <fieldForLabel>PodName</fieldForLabel>
       <fieldForValue>PodName</fieldForValue>
       <search>
-        <query>index="main" Type="MatchedPolicy" PodName="*" 
+        <query>index="*" Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ cluster_name=$ClusterName$
 | table PodName 
 | dedup PodName</query>
         <earliest>0</earliest>
@@ -154,9 +154,9 @@
       <title>Alerts breakdown on Compliance/TAG</title>
       <chart>
         <search>
-          <query>| pivot ComplianceTAG_Widget_KA RootObject count(ATags{}) AS "Count of ATags{}" SPLITROW Type AS Type SPLITCOL ATags{} FILTER ATags{} in (NIST,CIS,MITRE,"PCI-DSS",nist,cis,"pci-dss",mitre) BOTTOM 1000 count(ATags{}) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
-          <earliest>$timestamp.earliest$</earliest>
-          <latest>$timestamp.latest$</latest>
+          <query>| pivot ComplianceTAG_Widget_KA RootObject count(PolicyName) AS "Count of PolicyName{}" SPLITROW Type AS Type SPLITCOL ATags{} FILTER ATags{} in (NIST,CIS,MITRE,"PCI-DSS",nist,cis,"pci-dss",mitre) BOTTOM 1000 count(ATags{}) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <earliest>0</earliest>
+          <latest></latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
@@ -291,7 +291,7 @@
   </row>
   <row>
     <panel>
-      <title>Alerts generated from Different Namespace</title>
+      <title>Alerts generated form Different Namespace</title>
       <chart>
         <search>
           <query>| pivot KA_NAMESPACE_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
@@ -338,7 +338,7 @@
       </chart>
     </panel>
     <panel>
-      <title>Alerts generated from Different Pods</title>
+      <title>Alerts generated form Different Pods</title>
       <chart>
         <search>
           <query>| pivot KA_PODS_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW PodName AS PodName BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
@@ -415,7 +415,7 @@
         <option name="charting.chart.nullValueMode">gaps</option>
         <option name="charting.chart.showDataLabels">none</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">none</option>
         <option name="charting.layout.splitSeries">0</option>
@@ -459,7 +459,7 @@
         <option name="charting.chart.nullValueMode">gaps</option>
         <option name="charting.chart.showDataLabels">none</option>
         <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
-        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.stackMode">default</option>
         <option name="charting.chart.style">shiny</option>
         <option name="charting.drilldown">none</option>
         <option name="charting.fieldColors">{"1":#FD0000,"2":#FD3000,"3":#FD6800 , "4":#FD8900 , "5":#FDBA00 , "6":#FDD400, "7":#EBFD00,"8":#7FFD00, "9":#00FDA9, "10":#00A6FD }</option>
@@ -481,7 +481,7 @@
       <title>Alerts Summary</title>
       <table>
         <search>
-          <query>index="main" Type=MatchedPolicy  NamespaceName="$NamespaceName$" cluster_name="$ClusterName$" PodName="$PodName$"
+          <query>Type=MatchedPolicy  NamespaceName="$NamespaceName$" cluster_name="$ClusterName$" PodName="$PodName$"
 |table _time,ClusterName, NamespaceName,PodName,Severity,PolicyName,Message,Action,Result,Tags,Resource,Source 
 | sort 0 - _time
 | rename "PolicyName" AS "Policy"
