@@ -1,6 +1,6 @@
 {
-    "modelName": "KA_POLICY_F",
-    "displayName": "KA_POLICY_F",
+    "modelName": "CIS_TOTAL_KA",
+    "displayName": "CIS_TOTAL_KA",
     "description": "",
     "objectSummary": {
         "Event-Based": 1,
@@ -10,10 +10,22 @@
     "objects": [
         {
             "objectName": "RootObject",
-            "displayName": "1664213075.3166",
+            "displayName": "1670082422.1114",
             "parentName": "BaseEvent",
             "comment": "",
             "fields": [
+                {
+                    "fieldName": "ATags{}",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "ATags{}",
+                    "comment": ""
+                },
                 {
                     "fieldName": "Action",
                     "owner": "RootObject",
@@ -51,6 +63,18 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "ContainerImage",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "ContainerImage",
+                    "comment": ""
+                },
+                {
                     "fieldName": "ContainerName",
                     "owner": "RootObject",
                     "type": "string",
@@ -75,6 +99,18 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "Enforcer",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "Enforcer",
+                    "comment": ""
+                },
+                {
                     "fieldName": "HostName",
                     "owner": "RootObject",
                     "type": "string",
@@ -96,6 +132,30 @@
                     "hidden": false,
                     "editable": true,
                     "displayName": "HostPID",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "HostPPID",
+                    "owner": "RootObject",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "HostPPID",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "Labels",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "Labels",
                     "comment": ""
                 },
                 {
@@ -159,6 +219,18 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "ParentProcessName",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "ParentProcessName",
+                    "comment": ""
+                },
+                {
                     "fieldName": "PodName",
                     "owner": "RootObject",
                     "type": "string",
@@ -180,6 +252,18 @@
                     "hidden": false,
                     "editable": true,
                     "displayName": "PolicyName",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "ProcessName",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "ProcessName",
                     "comment": ""
                 },
                 {
@@ -267,6 +351,42 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "cluster_id",
+                    "owner": "RootObject",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cluster_id",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "cluster_name",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cluster_name",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "component_name",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "component_name",
+                    "comment": ""
+                },
+                {
                     "fieldName": "extracted_Source",
                     "owner": "RootObject",
                     "type": "string",
@@ -276,78 +396,6 @@
                     "hidden": false,
                     "editable": true,
                     "displayName": "extracted_Source",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_host",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_host",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_index",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_index",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_linecount",
-                    "owner": "RootObject",
-                    "type": "number",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_linecount",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_source",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_source",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_sourcetype",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_sourcetype",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "extracted_splunk_server",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "extracted_splunk_server",
                     "comment": ""
                 },
                 {
@@ -375,6 +423,30 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "instanceGroup",
+                    "owner": "RootObject",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "instanceGroup",
+                    "comment": ""
+                },
+                {
+                    "fieldName": "instanceID",
+                    "owner": "RootObject",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "instanceID",
+                    "comment": ""
+                },
+                {
                     "fieldName": "linecount",
                     "owner": "RootObject",
                     "type": "number",
@@ -396,18 +468,6 @@
                     "hidden": false,
                     "editable": true,
                     "displayName": "punct",
-                    "comment": ""
-                },
-                {
-                    "fieldName": "raw",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "raw",
                     "comment": ""
                 },
                 {
@@ -447,15 +507,15 @@
                     "comment": ""
                 },
                 {
-                    "fieldName": "time",
+                    "fieldName": "tenant_id",
                     "owner": "RootObject",
-                    "type": "string",
+                    "type": "number",
                     "fieldSearch": "",
                     "required": false,
                     "multivalue": false,
                     "hidden": false,
                     "editable": true,
-                    "displayName": "time",
+                    "displayName": "tenant_id",
                     "comment": ""
                 },
                 {
@@ -471,6 +531,18 @@
                     "comment": ""
                 },
                 {
+                    "fieldName": "workload",
+                    "owner": "RootObject",
+                    "type": "number",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "workload",
+                    "comment": ""
+                },
+                {
                     "fieldName": "_time",
                     "owner": "RootObject",
                     "type": "timestamp",
@@ -481,24 +553,12 @@
                     "editable": true,
                     "displayName": "_time",
                     "comment": ""
-                },
-                {
-                    "fieldName": "cluster_name",
-                    "owner": "RootObject",
-                    "type": "string",
-                    "fieldSearch": "",
-                    "required": false,
-                    "multivalue": false,
-                    "hidden": false,
-                    "editable": true,
-                    "displayName": "cluster_name",
-                    "comment": ""
                 }
             ],
             "calculations": [],
             "constraints": [
                 {
-                    "search": "index=\"main\" Type=\"MatchedPolicy\" PolicyName=\"*\"",
+                    "search": "index=\"main\" \"ATags{}\"=\"*\"",
                     "owner": "RootObject"
                 }
             ],

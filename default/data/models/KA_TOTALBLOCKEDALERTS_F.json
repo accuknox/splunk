@@ -397,6 +397,18 @@
                     "editable": true,
                     "displayName": "_time",
                     "comment": ""
+                },
+                {
+                    "fieldName": "cluster_name",
+                    "owner": "RootObject",
+                    "type": "string",
+                    "fieldSearch": "",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cluster_name",
+                    "comment": ""
                 }
             ],
             "calculations": [],
