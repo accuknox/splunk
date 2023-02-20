@@ -155,8 +155,8 @@
       <chart>
         <search>
           <query>| pivot ComplianceTAG_Widget_KA RootObject count(PolicyName) AS "Count of PolicyName{}" SPLITROW Type AS Type SPLITCOL ATags{} FILTER ATags{} in (NIST,CIS,MITRE,"PCI-DSS",nist,cis,"pci-dss",mitre) BOTTOM 1000 count(ATags{}) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
-          <earliest>0</earliest>
-          <latest></latest>
+          <earliest>$timestamp.earliest$</earliest>
+          <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
