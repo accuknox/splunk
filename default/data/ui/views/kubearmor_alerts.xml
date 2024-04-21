@@ -11,12 +11,12 @@
     <input type="dropdown" token="ClusterName">
       <label>Select Cluster</label>
       <choice value="*">All</choice>
-      <fieldForLabel>cluster_name</fieldForLabel>
-      <fieldForValue>cluster_name</fieldForValue>
+      <fieldForLabel>ClusterName</fieldForLabel>
+      <fieldForValue>ClusterName</fieldForValue>
       <search>
-        <query>index="*" Type="MatchedPolicy" cluster_name="*"
-| table cluster_name
-| dedup cluster_name</query>
+        <query>index="*" Type="MatchedPolicy" ClusterName="*"
+| table ClusterName
+| dedup ClusterName</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
@@ -31,7 +31,7 @@
       <fieldForLabel>NamespaceName</fieldForLabel>
       <fieldForValue>NamespaceName</fieldForValue>
       <search>
-        <query>index="*" Type="MatchedPolicy" NamespaceName="*" cluster_name=$ClusterName$
+        <query>index="*" Type="MatchedPolicy" NamespaceName="*" ClusterName=$ClusterName$
 | table NamespaceName 
 | dedup NamespaceName</query>
         <earliest>0</earliest>
@@ -43,7 +43,7 @@
       <fieldForLabel>PodName</fieldForLabel>
       <fieldForValue>PodName</fieldForValue>
       <search>
-        <query>index="*" Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ cluster_name=$ClusterName$
+        <query>index="*" Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ ClusterName=$ClusterName$
 | table PodName 
 | dedup PodName</query>
         <earliest>0</earliest>
@@ -59,7 +59,7 @@
       <title>Total Alerts Genrated</title>
       <single>
         <search>
-          <query>| pivot KA_TOTALALERTS_F RootObject count(Action) AS "Count of Action" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_TOTALALERTS_F RootObject count(Action) AS "Count of Action" ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -90,7 +90,7 @@
       <title>Total Blocked Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_TOTALBLOCKEDALERTS_F RootObject count(Action) AS "Count of Action" FILTER Action is Block ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_TOTALBLOCKEDALERTS_F RootObject count(Action) AS "Count of Action" FILTER Action is Block ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -121,7 +121,7 @@
       <title>Total Audited Alerts</title>
       <single>
         <search>
-          <query>| pivot KA_AUDITTOTAL_F RootObject count(Action) AS "Count of Action" FILTER Action is Audit ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_AUDITTOTAL_F RootObject count(Action) AS "Count of Action" FILTER Action is Audit ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -154,7 +154,7 @@
       <title>Alerts breakdown on Compliance/TAG</title>
       <chart>
         <search>
-          <query>| pivot ComplianceTAG_Widget_KA RootObject count(PolicyName) AS "Count of PolicyName{}" SPLITROW Type AS Type SPLITCOL ATags{} FILTER ATags{} in (NIST,CIS,MITRE,"PCI-DSS",nist,cis,"pci-dss",mitre) BOTTOM 1000 count(ATags{}) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot ComplianceTAG_Widget_KA RootObject count(PolicyName) AS "Count of PolicyName{}" SPLITROW Type AS Type SPLITCOL ATags{} FILTER ATags{} in (NIST,CIS,MITRE,"PCI-DSS",nist,cis,"pci-dss",mitre) BOTTOM 1000 count(ATags{}) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -201,7 +201,7 @@
       <title>Namespace Severity Summary</title>
       <chart>
         <search>
-          <query>| pivot KA_SEVERITY_NAMESPACE_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SPLITCOL Severity BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_SEVERITY_NAMESPACE_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SPLITCOL Severity BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -247,7 +247,7 @@
       <title>Policy Breakdown</title>
       <chart>
         <search>
-          <query>| pivot KA_POLICY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL PolicyName SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_POLICY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL PolicyName SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -294,7 +294,7 @@
       <title>Alerts generated form Different Namespace</title>
       <chart>
         <search>
-          <query>| pivot KA_NAMESPACE_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_NAMESPACE_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW NamespaceName AS NamespaceName SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -341,7 +341,7 @@
       <title>Alerts generated form Different Pods</title>
       <chart>
         <search>
-          <query>| pivot KA_PODS_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW PodName AS PodName BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_PODS_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW PodName AS PodName BOTTOM 1000 count(PolicyName) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -390,7 +390,7 @@
       <title>Alerts based on Operations</title>
       <chart>
         <search>
-          <query>| pivot KA_OPERATION_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Operation SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_OPERATION_BREAKDOWN_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Operation SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 1  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -434,7 +434,7 @@
       <title>Alerts based on Severity</title>
       <chart>
         <search>
-          <query>| pivot KA_SEVERITY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Severity SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0  FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot KA_SEVERITY_F RootObject count(PolicyName) AS "Count of PolicyName" SPLITROW _time AS _time PERIOD auto SPLITCOL Severity SORT 0 _time ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 1000 SHOWOTHER 0  FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -481,7 +481,7 @@
       <title>Alerts Summary</title>
       <table>
         <search>
-          <query>Type=MatchedPolicy  NamespaceName="$NamespaceName$" cluster_name="$ClusterName$" PodName="$PodName$"
+          <query>Type=MatchedPolicy  NamespaceName="$NamespaceName$" ClusterName="$ClusterName$" PodName="$PodName$"
 |table _time,ClusterName, NamespaceName,PodName,Severity,PolicyName,Message,Action,Result,Tags,Resource,Source 
 | sort 0 - _time
 | rename "PolicyName" AS "Policy"
