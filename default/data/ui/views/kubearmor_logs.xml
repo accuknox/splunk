@@ -28,12 +28,12 @@
     <input type="dropdown" token="ClusterName">
       <label>Select Cluster</label>
       <choice value="*">All</choice>
-      <fieldForLabel>cluster_name</fieldForLabel>
-      <fieldForValue>cluster_name</fieldForValue>
+      <fieldForLabel>ClusterName</fieldForLabel>
+      <fieldForValue>ClusterName</fieldForValue>
       <search>
         <query>Type="MatchedPolicy"  OR Type="ContainerLog" ClusterName="*"
-| table cluster_name
-| dedup cluster_name</query>
+| table ClusterName
+| dedup ClusterName</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
@@ -48,7 +48,7 @@
       <fieldForLabel>NamespaceName</fieldForLabel>
       <fieldForValue>NamespaceName</fieldForValue>
       <search>
-        <query>NamespaceName="*" cluster_name=$ClusterName$
+        <query>NamespaceName="*" ClusterName=$ClusterName$
 | table NamespaceName 
 | dedup NamespaceName</query>
         <earliest>0</earliest>
@@ -60,7 +60,7 @@
       <fieldForLabel>PodName</fieldForLabel>
       <fieldForValue>PodName</fieldForValue>
       <search>
-        <query>PodName="*" NamespaceName= $NamespaceName$ cluster_name=$ClusterName$
+        <query>PodName="*" NamespaceName= $NamespaceName$ ClusterName=$ClusterName$
 | table PodName 
 | dedup PodName</query>
         <earliest>0</earliest>
@@ -90,7 +90,7 @@
     <panel>
       <event>
         <search>
-          <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog"  NamespaceName="$NamespaceName$" PodName="$PodName$"  Operation="$Operation$"  cluster_name="$ClusterName$" $Type$</query>
+          <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog"  NamespaceName="$NamespaceName$" PodName="$PodName$"  Operation="$Operation$"  ClusterName="$ClusterName$" $Type$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
