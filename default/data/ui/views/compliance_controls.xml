@@ -11,12 +11,12 @@
     <input type="dropdown" token="ClusterName">
       <label>Select Cluster</label>
       <choice value="*">All</choice>
-      <fieldForLabel>cluster_name</fieldForLabel>
-      <fieldForValue>cluster_name</fieldForValue>
+      <fieldForLabel>ClusterName</fieldForLabel>
+      <fieldForValue>ClusterName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" cluster_name="*"
-| table cluster_name
-| dedup cluster_name</query>
+        <query>Type="MatchedPolicy" ClusterName="*"
+| table ClusterName
+| dedup ClusterName</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
@@ -31,7 +31,7 @@
       <fieldForLabel>NamespaceName</fieldForLabel>
       <fieldForValue>NamespaceName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" NamespaceName="*" cluster_name=$ClusterName$
+        <query>Type="MatchedPolicy" NamespaceName="*" ClusterName=$ClusterName$
 | table NamespaceName 
 | dedup NamespaceName</query>
         <earliest>0</earliest>
@@ -43,7 +43,7 @@
       <fieldForLabel>PodName</fieldForLabel>
       <fieldForValue>PodName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ cluster_name=$ClusterName$
+        <query>Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ ClusterName=$ClusterName$
 | table PodName 
 | dedup PodName</query>
         <earliest>0</earliest>
@@ -59,7 +59,7 @@
       <title>MITRE</title>
       <single>
         <search>
-          <query>| pivot MITRE_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (MITRE,mitre) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot MITRE_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (MITRE,mitre) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -90,7 +90,7 @@
       <title>NIST</title>
       <single>
         <search>
-          <query>| pivot NIST_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (NIST,"NIST-800","NIST-900","NIST-100") ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot NIST_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (NIST,"NIST-800","NIST-900","NIST-100") ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -121,7 +121,7 @@
       <title>CIS</title>
       <single>
         <search>
-          <query>| pivot CIS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (CIS,cis,cis1) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot CIS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (CIS,cis,cis1) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -152,7 +152,7 @@
       <title>PCI-DSS</title>
       <single>
         <search>
-          <query>| pivot PCIDSS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in ("PCI-DSS",PCI,DSS,pci,"pci-dss",dss) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot PCIDSS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in ("PCI-DSS",PCI,DSS,pci,"pci-dss",dss) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
@@ -184,7 +184,7 @@
     <panel>
       <table>
         <search>
-          <query>| pivot ATag_KA_count RootObject count(PolicyName) AS Count SPLITROW ATags{} AS "Tags /Controls" SPLITROW Severity AS "Severity" SORT 100 ATags{} ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot ATag_KA_count RootObject count(PolicyName) AS Count SPLITROW ATags{} AS "Tags /Controls" SPLITROW Severity AS "Severity" SORT 100 ATags{} ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
@@ -210,7 +210,7 @@
       <title>Compliance Summary Per Namespace</title>
       <chart>
         <search>
-          <query>| pivot Compliance_Summary_Per_Namespace RootObject count(PolicyName) AS "Count of Tags/Controls" SPLITROW NamespaceName AS Namespace SPLITCOL ATags{} SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER cluster_name is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot Compliance_Summary_Per_Namespace RootObject count(PolicyName) AS "Count of Tags/Controls" SPLITROW NamespaceName AS Namespace SPLITCOL ATags{} SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
