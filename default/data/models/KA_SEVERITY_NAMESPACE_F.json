@@ -498,7 +498,7 @@
             "calculations": [],
             "constraints": [
                 {
-                    "search": "index=\"main\" Type=\"MatchedPolicy\" NamespaceName=\"*\" Severity=\"*\"",
+                    "search": "index=\"*\" Type=\"MatchedPolicy\" OR Type=\"MatchedHostPolicy\" NamespaceName=\"*\"  OR HostName=\"*\" Severity=\"*\"",
                     "owner": "RootObject"
                 }
             ],

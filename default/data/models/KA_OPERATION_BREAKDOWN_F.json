@@ -594,7 +594,7 @@
             "calculations": [],
             "constraints": [
                 {
-                    "search": "index=\"main\" Type=\"MatchedPolicy\" Operation=\"*\"",
+                    "search": "index=\"*\" Type=\"MatchedPolicy\" OR Type=\"MatchedHostPolicy\" Operation=\"*\"",
                     "owner": "RootObject"
                 }
             ],
