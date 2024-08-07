@@ -558,7 +558,7 @@
             "calculations": [],
             "constraints": [
                 {
-                    "search": "index=\"main\" \"ATags{}\"=\"*\"",
+                    "search": "index=\"*\" \"ATags{}\"=\"*\"",
                     "owner": "RootObject"
                 }
             ],
