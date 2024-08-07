@@ -1446,7 +1446,7 @@
             "calculations": [],
             "constraints": [
                 {
-                    "search": "index=\"main\"",
+                    "search": "index=\"*\"",
                     "owner": "RootObject"
                 }
             ],
