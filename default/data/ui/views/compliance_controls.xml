@@ -23,35 +23,20 @@
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
-    <input type="dropdown" token="NamespaceName" searchWhenChanged="true">
-      <label>Namespace</label>
+    <input type="dropdown" token="HostName" searchWhenChanged="true">
+      <label>HostName</label>
       <choice value="*">All</choice>
       <default>*</default>
       <initialValue>*</initialValue>
-      <fieldForLabel>NamespaceName</fieldForLabel>
-      <fieldForValue>NamespaceName</fieldForValue>
+      <fieldForLabel>HostName</fieldForLabel>
+      <fieldForValue>HostName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" NamespaceName="*" ClusterName=$ClusterName$
-| table NamespaceName 
-| dedup NamespaceName</query>
+        <query>Type="MatchedPolicy" OR Type="MatchedHostPolicy" HostName="*" ClusterName=$ClusterName$
+| table HostName 
+| dedup HostName</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
-    </input>
-    <input type="dropdown" token="PodName">
-      <label>Pod</label>
-      <fieldForLabel>PodName</fieldForLabel>
-      <fieldForValue>PodName</fieldForValue>
-      <search>
-        <query>Type="MatchedPolicy" PodName="*" NamespaceName= $NamespaceName$ ClusterName=$ClusterName$
-| table PodName 
-| dedup PodName</query>
-        <earliest>0</earliest>
-        <latest></latest>
-      </search>
-      <choice value="*">All</choice>
-      <default>*</default>
-      <initialValue>*</initialValue>
     </input>
   </fieldset>
   <row>
@@ -59,10 +44,12 @@
       <title>MITRE</title>
       <single>
         <search>
-          <query>| pivot MITRE_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (MITRE,mitre) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot MITRE_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (MITRE,mitre) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER   ClusterName is $ClusterName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
@@ -71,7 +58,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
         <option name="rangeValues">[0,30,70,100]</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -90,10 +77,12 @@
       <title>NIST</title>
       <single>
         <search>
-          <query>| pivot NIST_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (NIST,"NIST-800","NIST-900","NIST-100") ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot NIST_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (NIST,"NIST-800","NIST-900","NIST-100") ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER HostName is $HostName$ FILTER ClusterName is $ClusterName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
@@ -102,7 +91,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
         <option name="rangeValues">[0,30,70,100]</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -121,10 +110,12 @@
       <title>CIS</title>
       <single>
         <search>
-          <query>| pivot CIS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (CIS,cis,cis1) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot CIS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in (CIS,cis,cis1) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER HostName is $HostName$ FILTER ClusterName is $ClusterName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
@@ -133,7 +124,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
         <option name="rangeValues">[0,30,70,100]</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -152,10 +143,12 @@
       <title>PCI-DSS</title>
       <single>
         <search>
-          <query>| pivot PCIDSS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in ("PCI-DSS",PCI,DSS,pci,"pci-dss",dss) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot PCIDSS_TOTAL_KA RootObject count(PolicyName) AS "Count of PolicyName" FILTER ATags{} in ("PCI-DSS",PCI,DSS,pci,"pci-dss",dss) ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER HostName is $HostName$ FILTER ClusterName is $ClusterName$</query>
           <earliest>0</earliest>
           <latest></latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="colorBy">value</option>
         <option name="colorMode">block</option>
@@ -164,7 +157,7 @@
         <option name="numberPrecision">0</option>
         <option name="rangeColors">["0x53a051","0x0877a6","0xf8be34","0xf1813f","0xdc4e41"]</option>
         <option name="rangeValues">[0,30,70,100]</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="showSparkline">1</option>
         <option name="showTrendIndicator">1</option>
         <option name="trellis.enabled">0</option>
@@ -184,16 +177,18 @@
     <panel>
       <table>
         <search>
-          <query>| pivot ATag_KA_count RootObject count(PolicyName) AS Count SPLITROW ATags{} AS "Tags /Controls" SPLITROW Severity AS "Severity" SORT 100 ATags{} ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot ATag_KA_count RootObject count(PolicyName) AS Count SPLITROW ATags{} AS "Tags /Controls" SPLITROW Severity AS "Severity" SORT 100 ATags{} ROWSUMMARY 0 COLSUMMARY 0 SHOWOTHER 1 FILTER HostName is $HostName$ FILTER ClusterName is $ClusterName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="count">10</option>
         <option name="dataOverlayMode">none</option>
         <option name="drilldown">cell</option>
         <option name="percentagesRow">false</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="rowNumbers">false</option>
         <option name="totalsRow">false</option>
         <option name="wrap">true</option>
@@ -210,10 +205,12 @@
       <title>Compliance Summary Per Namespace</title>
       <chart>
         <search>
-          <query>| pivot Compliance_Summary_Per_Namespace RootObject count(PolicyName) AS "Count of Tags/Controls" SPLITROW NamespaceName AS Namespace SPLITCOL ATags{} SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1 FILTER NamespaceName is $NamespaceName$ FILTER ClusterName is $ClusterName$ FILTER PodName is $PodName$</query>
+          <query>| pivot Compliance_Summary_Per_Namespace RootObject count(PolicyName) AS "Count of Tags/Controls" SPLITROW NamespaceName AS Namespace SPLITCOL ATags{} SORT 100 NamespaceName ROWSUMMARY 0 COLSUMMARY 0 NUMCOLS 100 SHOWOTHER 1 FILTER HostName is $HostName$ FILTER ClusterName is $ClusterName$</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
+          <refresh>30s</refresh>
+          <refreshType>delay</refreshType>
         </search>
         <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
         <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
@@ -245,7 +242,7 @@
         <option name="charting.legend.placement">bottom</option>
         <option name="charting.lineWidth">2</option>
         <option name="height">365</option>
-        <option name="refresh.display">progressbar</option>
+        <option name="refresh.display">preview</option>
         <option name="trellis.enabled">0</option>
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
