@@ -6,15 +6,17 @@
       <fieldForLabel>Type</fieldForLabel>
       <fieldForValue>Log</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" OR "ContainerLog"
+        <query>Type="MatchedPolicy" OR Type="ContainerLog" OR Type="MatchedHostPolicy" OR Type="HostLog"
 | dedup Type
 | table Type</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
       <choice value="*">All</choice>
-      <choice value="MatchedPolicy">Alerts</choice>
-      <choice value="ContainerLog">Syslog</choice>
+      <choice value="MatchedPolicy">Cluster Alerts</choice>
+      <choice value="ContainerLog">Cluster Container Logs</choice>
+      <choice value="MatchedHostPolicy">Host Alert</choice>
+      <choice value="HostLog">Host Logs</choice>
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
@@ -26,12 +28,12 @@
       </default>
     </input>
     <input type="dropdown" token="ClusterName">
-      <label>Select Cluster</label>
+      <label>ClusterName</label>
       <choice value="*">All</choice>
       <fieldForLabel>ClusterName</fieldForLabel>
       <fieldForValue>ClusterName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy"  OR Type="ContainerLog" ClusterName="*"
+        <query>Type="MatchedPolicy" OR Type="ContainerLog" OR Type="MatchedHostPolicy" OR Type="HostLog" ClusterName="*"
 | table ClusterName
 | dedup ClusterName</query>
         <earliest>0</earliest>
@@ -40,35 +42,20 @@
       <default>*</default>
       <initialValue>*</initialValue>
     </input>
-    <input type="dropdown" token="NamespaceName" searchWhenChanged="true">
-      <label>Namespace</label>
+    <input type="dropdown" token="HostName" searchWhenChanged="true">
+      <label>HostName</label>
       <choice value="*">All</choice>
       <default>*</default>
       <initialValue>*</initialValue>
-      <fieldForLabel>NamespaceName</fieldForLabel>
-      <fieldForValue>NamespaceName</fieldForValue>
+      <fieldForLabel>HostName</fieldForLabel>
+      <fieldForValue>HostName</fieldForValue>
       <search>
-        <query>NamespaceName="*" ClusterName=$ClusterName$
-| table NamespaceName 
-| dedup NamespaceName</query>
+        <query>HostName="*" ClusterName=$ClusterName$
+| table HostName
+| dedup HostName</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
-    </input>
-    <input type="dropdown" token="PodName">
-      <label>Pod</label>
-      <fieldForLabel>PodName</fieldForLabel>
-      <fieldForValue>PodName</fieldForValue>
-      <search>
-        <query>PodName="*" NamespaceName= $NamespaceName$ ClusterName=$ClusterName$
-| table PodName 
-| dedup PodName</query>
-        <earliest>0</earliest>
-        <latest></latest>
-      </search>
-      <choice value="*">All</choice>
-      <default>*</default>
-      <initialValue>*</initialValue>
     </input>
     <input type="dropdown" token="Operation">
       <label>Operation</label>
@@ -78,9 +65,24 @@
       <fieldForLabel>Operation</fieldForLabel>
       <fieldForValue>Operation</fieldForValue>
       <search>
-        <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog" Operation ="*" 
+        <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog" OR Type="MatchedHostPolicy" OR Type="HostLog" Operation ="*" 
 | table Operation 
 | dedup Operation</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+    </input>
+    <input type="dropdown" token="Severity">
+      <label>Severity</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <fieldForLabel>Severity</fieldForLabel>
+      <fieldForValue>Severity</fieldForValue>
+      <search>
+        <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog" OR Type="MatchedHostPolicy" OR Type="HostLog" Severity ="*" 
+| table Severity 
+| dedup Severity</query>
         <earliest>0</earliest>
         <latest></latest>
       </search>
@@ -90,24 +92,24 @@
     <panel>
       <event>
         <search>
-          <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog"  NamespaceName="$NamespaceName$" PodName="$PodName$"  Operation="$Operation$"  ClusterName="$ClusterName$" $Type$</query>
+          <query>index="*" Type="MatchedPolicy" OR Type="ContainerLog" OR Type="MatchedHostPolicy" OR Type="HostLog" HostName="$HostName$" Operation="$Operation$" Severity="$Severity$" ClusterName="$ClusterName$" Type="$Type$"</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
           <refresh>30s</refresh>
           <refreshType>delay</refreshType>
         </search>
-        <option name="count">20</option>
-        <option name="list.drilldown">none</option>
+        <option name="count">10</option>
+        <option name="list.drilldown">full</option>
         <option name="list.wrap">1</option>
-        <option name="maxLines">5</option>
+        <option name="maxLines">10</option>
         <option name="raw.drilldown">full</option>
         <option name="refresh.display">progressbar</option>
-        <option name="rowNumbers">0</option>
-        <option name="table.drilldown">all</option>
+        <option name="rowNumbers">1</option>
+        <option name="table.drilldown">none</option>
         <option name="table.sortDirection">asc</option>
         <option name="table.wrap">1</option>
-        <option name="type">list</option>
+        <option name="type">raw</option>
       </event>
     </panel>
   </row>
