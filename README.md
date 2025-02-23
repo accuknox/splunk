@@ -9,7 +9,10 @@
 ## 📂 To Install Accuknox Splunk App on your Splunk Deployment  follow these steps 
 https://help.accuknox.com/how-to/splunkapp/accuknox-splunk-app-installation-configuration/
 
- Deployment.
+## 💼 Also available on SplunkBase
+https://splunkbase.splunk.com/app/6766
+
+
 ### 👩‍💻  Developer documentation - WIP
 
 **Landing Dashboard**
