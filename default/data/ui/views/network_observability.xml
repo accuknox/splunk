@@ -1,10 +1,10 @@
 <form version="1.1" theme="dark">
-  <label>Network Observability</label>
+  <label>Network</label>
   <fieldset submitButton="false">
-    <input type="time" token="field1">
-      <label></label>
+    <input type="time" token="timestamp">
+      <label>Select Time</label>
       <default>
-        <earliest>-30d@h</earliest>
+        <earliest>-7d@h</earliest>
         <latest>now</latest>
       </default>
     </input>
@@ -13,7 +13,6 @@
     <panel>
       <title>Top 5 External IP Calls</title>
       <chart>
-        <title>The top 5 external IPs receiving the most requests, excluding internal/private IPs</title>
         <search>
           <query>index=* operation="network" 
 | where NOT cidrmatch("10.0.0.0/8", network.ip) 
@@ -24,8 +23,8 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
 | stats count by network.ip
 | sort -count 
 | head 5</query>
-          <earliest>$field1.earliest$</earliest>
-          <latest>$field1.latest$</latest>
+          <earliest>$timestamp.earliest$</earliest>
+          <latest>$timestamp.latest$</latest>
           <refresh>30s</refresh>
           <refreshType>delay</refreshType>
         </search>
@@ -33,13 +32,13 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
         <option name="charting.axisTitleY.visibility">visible</option>
         <option name="charting.axisY.scale">linear</option>
         <option name="charting.chart">column</option>
-        <option name="charting.seriesColors">["#3357ff"]</option>
         <option name="charting.chart.showDataLabels">none</option>
         <option name="charting.chart.stackMode">default</option>
         <option name="charting.drilldown">none</option>
         <option name="charting.layout.splitSeries">1</option>
         <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
         <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.seriesColors">["#3357ff"]</option>
         <option name="height">394</option>
         <option name="refresh.display">progressbar</option>
       </chart>
@@ -47,7 +46,6 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
     <panel>
       <title>Top 5 Hosts Making the Eternal lP calls</title>
       <chart>
-        <title>Top 5 internal hosts with the most outbound requests to external IPs</title>
         <search>
           <query>index=* operation="network" 
 | where NOT cidrmatch("10.0.0.0/8", network.ip) 
@@ -58,8 +56,8 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
 | stats count by host
 | sort -count 
 | head 5</query>
-          <earliest>$field1.earliest$</earliest>
-          <latest>$field1.latest$</latest>
+          <earliest>$timestamp.earliest$</earliest>
+          <latest>$timestamp.latest$</latest>
           <sampleRatio>1</sampleRatio>
           <refresh>30s</refresh>
           <refreshType>delay</refreshType>
@@ -77,7 +75,6 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
         <option name="charting.axisY2.enabled">0</option>
         <option name="charting.axisY2.scale">inherit</option>
         <option name="charting.chart">bar</option>
-        <option name="charting.seriesColors">["#33ff57"]</option>
         <option name="charting.chart.bubbleMaximumSize">50</option>
         <option name="charting.chart.bubbleMinimumSize">10</option>
         <option name="charting.chart.bubbleSizeBy">area</option>
@@ -93,6 +90,7 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
         <option name="charting.legend.mode">standard</option>
         <option name="charting.legend.placement">right</option>
         <option name="charting.lineWidth">2</option>
+        <option name="charting.seriesColors">["#33ff57"]</option>
         <option name="height">392</option>
         <option name="refresh.display">progressbar</option>
         <option name="trellis.enabled">0</option>
@@ -105,7 +103,6 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
     <panel>
       <title>Network Behavior Summary</title>
       <table>
-        <title>Overview of network activity, key trends, top hosts, and anomalies</title>
         <search>
           <query>index=* sourcetype=* operation="network"
 | where NOT cidrmatch("10.0.0.0/8", network.ip) 
@@ -115,8 +112,8 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
        AND NOT cidrmatch("169.254.0.0/16", network.ip)
 | stats count by _time, host, source, operation, network.type, network.ip, network.port, network.command workload.name
 | sort -count</query>
-          <earliest>$field1.earliest$</earliest>
-          <latest>$field1.latest$</latest>
+          <earliest>$timestamp.earliest$</earliest>
+          <latest>$timestamp.latest$</latest>
           <refresh>30s</refresh>
           <refreshType>delay</refreshType>
         </search>

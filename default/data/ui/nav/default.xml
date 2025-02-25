@@ -2,5 +2,6 @@
   <view name="kubearmor_alerts" default='true'  />
   <view name="compliance_controls" />
   <view name="kubearmor_logs" />
-  <view name="network _observability" />
+  <view name="network_observability" />
+  <view name="process_observability" />
 </nav>
