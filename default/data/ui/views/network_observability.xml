@@ -1,5 +1,5 @@
 <form version="1.1" theme="dark">
-  <label>Network</label>
+  <label>Network Observability</label>
   <fieldset submitButton="false">
     <input type="time" token="timestamp">
       <label>Select Time</label>
