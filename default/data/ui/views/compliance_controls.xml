@@ -14,7 +14,7 @@
       <fieldForLabel>ClusterName</fieldForLabel>
       <fieldForValue>ClusterName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" ClusterName="*"
+        <query>index="*" Type="MatchedPolicy" OR Type="MatchedHostPolicy" ClusterName="*"
 | table ClusterName
 | dedup ClusterName</query>
         <earliest>0</earliest>
@@ -31,8 +31,8 @@
       <fieldForLabel>HostName</fieldForLabel>
       <fieldForValue>HostName</fieldForValue>
       <search>
-        <query>Type="MatchedPolicy" OR Type="MatchedHostPolicy" HostName="*" ClusterName=$ClusterName$
-| table HostName 
+        <query>index="*" Type="MatchedPolicy" OR Type="MatchedHostPolicy" HostName="*" ClusterName=$ClusterName$
+| table HostName
 | dedup HostName</query>
         <earliest>0</earliest>
         <latest></latest>
