@@ -14,7 +14,7 @@
       <title>Top 5 Most Executed Processes Per Host</title>
       <chart>
         <search>
-          <query>index=cwpp sourcetype=* operation="process"
+          <query>index=* sourcetype=* operation="process"
 | stats count by process_file.source host
 | sort -count
 | head 5
@@ -68,7 +68,7 @@
       <title>Top Executed Processes and File Access Patterns Across Hosts</title>
       <table>
         <search>
-          <query>index=cwpp sourcetype=* 
+          <query>index=* sourcetype=* 
 | stats count by _time host operation process_file.source process_file.destination process_file.count action
 | sort -count</query>
           <earliest>$timestamp.earliest$</earliest>
