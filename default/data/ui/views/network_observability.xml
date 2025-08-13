@@ -110,7 +110,32 @@ AND NOT cidrmatch("169.254.0.0/16", network.ip)
        AND NOT cidrmatch("172.16.0.0/12", network.ip) 
        AND NOT cidrmatch("127.0.0.0/8", network.ip)
        AND NOT cidrmatch("169.254.0.0/16", network.ip)
-| stats count by _time, host, source, operation, network.type, network.ip, network.port, network.command workload.name
+       AND NOT cidrmatch("::1/128", network.ip)
+       AND NOT cidrmatch("fc00::/7", network.ip)
+       AND NOT cidrmatch("fe80::/10", network.ip)
+       AND NOT cidrmatch("::/128", network.ip)
+| stats count,
+    first(geolocation.country) as geolocation.country,
+    first(geolocation.city) as geolocation.city,
+    first(geolocation.latitude) as geolocation.latitude,
+    first(geolocation.longitude) as geolocation.longitude,
+    first(proxy.type) as proxy.type,
+    first(proxy.isp) as proxy.isp,
+    first(proxy.asn) as proxy.asn,
+    first(proxy.as) as proxy.as,
+    first(proxy.thread) as proxy.threat,
+    first(proxy.provider) as proxy.provider,
+    first(proxy.fraudScore) as proxy.fraudScore
+  by
+       _time,
+       host,
+       source,
+       operation,
+       network.type,
+       network.ip,
+       network.port,
+       network.command,
+       workload.name
 | sort -count</query>
           <earliest>$timestamp.earliest$</earliest>
           <latest>$timestamp.latest$</latest>
